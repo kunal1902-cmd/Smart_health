@@ -1,26 +1,77 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #060911;
+    --foreground: #f1f5f9;
+    --card: #0c121e;
+    --card-foreground: #f8fafc;
+    --border: #1e293b;
+    --primary: #0284c7;
+    --danger: #dc2626;
+    --warning: #d97706;
+    --success: #059669;
+  }
+
+  /* Universal prevention of text insertion caret line */
+  *, *::before, *::after {
+    caret-color: transparent !important;
+  }
+
+  input,
+  textarea,
+  [contenteditable="true"] {
+    caret-color: auto !important;
+  }
+
+  html,
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11", "tnum";
+    overflow-x: hidden;
+    cursor: default;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+
+  /* Remove browser focus outline / insertion lines on mouse clicks */
+  *:focus:not(:focus-visible) {
+    outline: none !important;
+  }
+
+  /* Specific selectable text where needed */
+  code,
+  pre,
+  .selectable-text {
+    user-select: text;
+    -webkit-user-select: text;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #080c16;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* Monospace metrics font styling */
+.font-metric {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  letter-spacing: -0.02em;
 }

@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aarogya-Grid | Executive Pitch Deck</title>
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <style>
+    :root {
+      --bg: #060911;
+      --card: #0c121e;
+      --border: #1e293b;
+      --primary: #0284c7;
+      --emerald: #059669;
+      --rose: #dc2626;
+      --amber: #d97706;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      caret-color: transparent !important;
+      user-select: none;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Presentation Header */
+    header {
+      border-bottom: 1px solid var(--border);
+      background: #080d19;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      font-family: monospace;
+      z-index: 10;
+    }
+
+    .badge {
+      padding: 3px 8px;
+      border-radius: 2px;
+      border: 1px solid var(--border);
+      background: #0f172a;
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    /* Slide Deck Stage */
+    #deck {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    .slide {
+      position: absolute;
+      width: 100%;
+      max-width: 1100px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(15px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .slide-tag {
+      font-family: monospace;
+      font-size: 11px;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .slide-title {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      line-height: 1.2;
+    }
+
+    .slide-subtitle {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 20px;
+      border-radius: 4px;
+    }
+
+    .card-title {
+      font-family: monospace;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+
+    .card-body {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .metric-value {
+      font-family: monospace;
+      font-size: 28px;
+      font-weight: bold;
+      color: #fff;
+      margin: 8px 0;
+    }
+
+    .tag-danger {
+      color: var(--rose);
+      border-color: var(--rose);
+    }
+
+    .tag-success {
+      color: var(--emerald);
+      border-color: var(--emerald);
+    }
+
+    /* Deck Controls */
+    footer {
+      border-top: 1px solid var(--border);
+      background: #080d19;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: monospace;
+      font-size: 12px;
+      z-index: 10;
+    }
+
+    .nav-btn {
+      background: #0f172a;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 14px;
+      border-radius: 2px;
+      cursor: pointer;
+      font-family: monospace;
+      font-size: 12px;
+    }
+
+    .nav-btn:hover {
+      background: #1e293b;
+      color: #fff;
+    }
+
+    .progress-bar-container {
+      flex: 1;
+      max-width: 300px;
+      height: 4px;
+      background: #1e293b;
+      border-radius: 2px;
+      overflow: hidden;
+      margin: 0 20px;
+    }
+
+    #progress-bar {
+      height: 100%;
+      background: var(--primary);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Presentation Header -->
+  <header>
+    <div>
+      <span class="badge">MoHFW STATUTORY PITCH DECK</span>
+      <span style="color: var(--muted); margin-left: 10px;">AAROGYA-GRID // NATIONAL HEALTH RESOURCE PLATFORM</span>
+    </div>
+    <div style="color: var(--muted);">
+      USE KEYBOARD <span style="color: var(--primary); font-weight: bold;">[← / →]</span> OR BUTTONS BELOW
+    </div>
+  </header>
+
+  <!-- Slide Canvas -->
+  <div id="deck">
+
+    <!-- Slide 1: Title -->
+    <div class="slide active" data-slide="1">
+      <div class="slide-tag">Platform Presentation | Gazette Ref: 2026/04</div>
+      <h1 class="slide-title">Aarogya-Grid (आरोग्य-ग्रिड)</h1>
+      <p class="slide-subtitle">
+        National Autonomous Public Health Resource & Supply Chain Platform for Inter-Facility Peer-to-Peer Stock Reallocation
+      </p>
+      <div class="grid-3" style="margin-top: 15px;">
+        <div class="card">
+          <div class="card-title">Ministry Mandate</div>
+          <div class="card-body">Operated under Ministry of Health and Family Welfare (MoHFW) to eliminate rural PHC medicine stockouts.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Algorithmic Reallocation</div>
+          <div class="card-body">Dynamic peer-to-peer redistribution between Primary Health Centres, bypassing centralized depot delays.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Regulatory Compliance</div>
+          <div class="card-body">DPDP Act 2023, DISHA guidelines, and continuous 2.0°C - 8.0°C cold-chain telemetry tracking.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2: The Critical Challenge -->
+    <div class="slide" data-slide="2">
+      <div class="slide-tag">Problem Statement</div>
+      <h1 class="slide-title">The Rural Healthcare Supply Chain Bottleneck</h1>
+      <p class="slide-subtitle">
+        Sub-district health centres suffer from inventory latency and localized stockouts during seasonal disease surges.
+      </p>
+      <div class="grid-3" style="margin-top: 15px;">
+        <div class="card">
+          <div class="card-title tag-danger">Central Depot Latency</div>
+          <div class="card-body">Routine replenishment cycles from regional warehouses require 48 to 72 hours. Weather bottlenecks (e.g. NH-24 flooding) break delivery schedules.</div>
+        </div>
+        <div class="card">
+          <div class="card-title tag-danger">Unseen Epidemic Spikes</div>
+          <div class="card-body">Sudden surges in diarrheal or vector-borne illness accelerate daily burn rates by +35% to +42%, exhausting standard 15-day buffers in under 5 days.</div>
+        </div>
+        <div class="card">
+          <div class="card-title tag-danger">Inventory Asymmetry</div>
+          <div class="card-body">While PHC A suffers severe deficit, neighboring PHC C holds an unutilized 76-day surplus. No autonomous inter-facility transfer mechanism existed.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3: Architecture & Nodes -->
+    <div class="slide" data-slide="3">
+      <div class="slide-tag">Network Architecture</div>
+      <h1 class="slide-title">Multi-PHC Autonomous Network Grid</h1>
+      <p class="slide-subtitle">
+        Continuous multi-dimensional telemetry tracking five mandatory operational pillars across all nodes.
+      </p>
+      <div class="grid-3" style="margin-top: 15px;">
+        <div class="card">
+          <div class="card-title" style="color: var(--rose);">PHC A (District 1 - Rampur)</div>
+          <div class="card-body">
+            • Status: Critical Deficit (5 Days stockout)<br>
+            • Patient Footfall: 390/day (+18.4% surge)<br>
+            • Beds: 6/45 available (86.7% occupancy)<br>
+            • Staff: 90% attendance (4 MDs, 14 RNs)<br>
+            • Supply: 500 units delayed by 48h (NH-24 flood)
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title" style="color: var(--amber);">PHC B (District 2 - Sitapur)</div>
+          <div class="card-body">
+            • Status: Elevated Watch (31 Days buffer)<br>
+            • Patient Footfall: 237/day (Stable)<br>
+            • Beds: 22/50 available (56% occupancy)<br>
+            • Staff: 96% attendance (6 MDs, 18 RNs)<br>
+            • Supply: 1,200 units in transit (6h ETA)
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title" style="color: var(--emerald);">PHC C (District 3 - Ganga Valley)</div>
+          <div class="card-body">
+            • Status: Surplus Buffer (Donor Node)<br>
+            • Patient Footfall: 178/day (-8.1% decline)<br>
+            • Beds: 38/60 available (36.6% occupancy)<br>
+            • Staff: 95% attendance (5 MDs, 14 RNs)<br>
+            • Supply: 2,500 units delivered on-site
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4: Predictive Medicine Module -->
+    <div class="slide" data-slide="4">
+      <div class="slide-tag">Core Demo Flow</div>
+      <h1 class="slide-title">Predictive Epidemic Stockout Modeling</h1>
+      <p class="slide-subtitle">
+        Real-time epidemiological surveillance answering: <em>"Will this PHC run out of this medicine soon?"</em>
+      </p>
+      <div class="grid-2" style="margin-top: 15px;">
+        <div class="card">
+          <div class="card-title">ORS Sachets Inventory Metrics</div>
+          <div class="card-body" style="font-family: monospace;">
+            • Current Stock: <strong>1,240 sachets</strong><br>
+            • Daily Consumption: <strong>185 units/day</strong><br>
+            • Incoming Supply: <strong>500 units</strong> (Delayed +48h)<br>
+            • Predicted Demand: <strong>2,100 units</strong> (7-day horizon)<br>
+            • Estimated Stockout: <strong style="color: var(--rose);">5 Days [HIGH RISK]</strong>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Surveillance Intelligence Readout</div>
+          <div class="card-body">
+            <strong>WARNING: YES - STOCKOUT IMMINENT WITHIN 120 HOURS.</strong><br><br>
+            Correlates an +18.4% surge in gastro-enteritis footfall following monsoon groundwater table disruption. Prescribes immediate transfer of 900 units from surplus donor PHC C via green corridor NH-27.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 5: The Redistribution Execution -->
+    <div class="slide" data-slide="5">
+      <div class="slide-tag">Autonomous Mitigation</div>
+      <h1 class="slide-title">Executing Inter-Facility Buffer Transfer</h1>
+      <p class="slide-subtitle">
+        4-stage algorithmic dispatch sequence protecting both donor and recipient safety thresholds.
+      </p>
+      <div class="grid-2" style="margin-top: 15px;">
+        <div class="card">
+          <div class="card-title">4-Stage Dispatch Protocol</div>
+          <div class="card-body">
+            <strong>1. Routing Matrix Verification:</strong> PHC C selected (34 km via NH-27). Donor retains 68-day buffer.<br><br>
+            <strong>2. Quality & Cold-Chain Seal:</strong> Batch #ORS-2026-X88 cryptographically locked.<br><br>
+            <strong>3. Autonomous Dispatch:</strong> Electric Logistics Van #EV-902 deployed on NH-27 priority lane.<br><br>
+            <strong>4. Ledger Settlement:</strong> TxHash recorded to national health registry.
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title tag-success">Post-Transfer Rebalancing Outcome</div>
+          <div class="card-body">
+            <div class="metric-value" style="color: var(--emerald);">2,140 Units</div>
+            <p>Current stock boosted (+900 reallocated units).</p>
+            <div class="metric-value" style="color: var(--emerald); margin-top: 15px;">18 Days</div>
+            <p>Stockout risk suppressed from <span style="color: var(--rose); font-weight: bold;">5 Days [HIGH RISK]</span> to <span style="color: var(--emerald); font-weight: bold;">18 Days [STABLE]</span>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 6: Tactical Map & Ledger -->
+    <div class="slide" data-slide="6">
+      <div class="slide-tag">Tactical Logistics & Governance</div>
+      <h1 class="slide-title">Real-Time Corridors & Consensus Ledger</h1>
+      <p class="slide-subtitle">
+        Tamper-evident audit trail backed by Proof-of-Authority consensus and live GPS telemetry.
+      </p>
+      <div class="grid-2" style="margin-top: 15px;">
+        <div class="card">
+          <div class="card-title">Green Corridor NH-27</div>
+          <div class="card-body">
+            • 34 km inter-district arterial route connecting PHC C and PHC A.<br>
+            • Electric logistics vehicle #EV-902 equipped with IoT thermal logger.<br>
+            • NavIC satellite constellation tracking provides real-time 14ms latency telemetry.<br>
+            • Automatically bypasses flooded NH-24 central depot corridor.
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">National Health Resource Registry</div>
+          <div class="card-body">
+            • Immutable transaction ledger accessible at <code>/ledger</code>.<br>
+            • SHA-256 cryptographic digests ensure auditability across all transfers.<br>
+            • Continuous cold-chain compliance: logs mean temperature at 3.8°C.<br>
+            • Fully auditable for District Magistrates and Chief Medical Officers.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 7: Technical Rigor & Architecture -->
+    <div class="slide" data-slide="7">
+      <div class="slide-tag">Engineering Specifications</div>
+      <h1 class="slide-title">Production Full-Stack Architecture</h1>
+      <p class="slide-subtitle">
+        High-performance, enterprise-grade Next.js App Router and Tailwind CSS implementation.
+      </p>
+      <div class="grid-3" style="margin-top: 15px;">
+        <div class="card">
+          <div class="card-title">Next.js 16 + Turbopack</div>
+          <div class="card-body">Fast static page generation with zero client latency. Instant hot-reloading and modular component hierarchy.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">App Router API Handlers</div>
+          <div class="card-body">REST endpoints for <code>/api/health</code>, <code>/api/nodes</code>, <code>/api/telemetry</code>, <code>/api/reallocate</code>, and <code>/api/ledger</code>.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Statutory Compliance</div>
+          <div class="card-body">Dedicated routes for Privacy Policy (DPDP Act 2023) at <code>/privacy</code> and Terms of Operation at <code>/terms</code>.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 8: Summary & Presentation Next Steps -->
+    <div class="slide" data-slide="8">
+      <div class="slide-tag">Conclusion</div>
+      <h1 class="slide-title">Aarogya-Grid: Impact & Deployment</h1>
+      <p class="slide-subtitle">
+        Transforming static rural warehouses into an intelligent, autonomous national health safety net.
+      </p>
+      <div class="grid-3" style="margin-top: 15px;">
+        <div class="card">
+          <div class="card-title tag-success">Zero Stockout Deaths</div>
+          <div class="card-body">Automated peer-to-peer buffer reallocation ensures essential life-saving formulations are delivered before depletion.</div>
+        </div>
+        <div class="card">
+          <div class="card-title tag-success">Supply Waste Reduction</div>
+          <div class="card-body">Prevents batch expiration in surplus facilities by transferring excess inventory to high-burn epidemic zones.</div>
+        </div>
+        <div class="card">
+          <div class="card-title tag-success">National Scale Ready</div>
+          <div class="card-body">Engineered for immediate integration with e-Aushadhi, HMIS, and CoWIN national infrastructure.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Deck Navigation Footer -->
+  <footer>
+    <div id="slide-indicator">Slide 1 of 8</div>
+    <div class="progress-bar-container">
+      <div id="progress-bar"></div>
+    </div>
+    <div style="display: flex; gap: 8px;">
+      <button class="nav-btn" id="prev-btn" onclick="prevSlide()">[←] PREVIOUS</button>
+      <button class="nav-btn" id="next-btn" onclick="nextSlide()">NEXT [→]</button>
+      <button class="nav-btn" onclick="toggleFullScreen()">FULLSCREEN</button>
+      <a href="/" class="nav-btn" style="text-decoration: none; color: var(--primary);">LIVE DASHBOARD</a>
+    </div>
+  </footer>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 8;
+
+    function updateDeck() {
+      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+      const active = document.querySelector(`.slide[data-slide="${currentSlide}"]`);
+      if (active) active.classList.add('active');
+
+      document.getElementById('slide-indicator').innerText = `Slide ${currentSlide} of ${totalSlides}`;
+      document.getElementById('progress-bar').style.width = `${(currentSlide / totalSlides) * 100}%`;
+
+      document.getElementById('prev-btn').disabled = currentSlide === 1;
+      document.getElementById('next-btn').disabled = currentSlide === totalSlides;
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        currentSlide++;
+        updateDeck();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        currentSlide--;
+        updateDeck();
+      }
+    }
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        prevSlide();
+      }
+    });
+
+    updateDeck();
+  </script>
+</body>
+</html>
