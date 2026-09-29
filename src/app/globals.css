@@ -2,15 +2,15 @@
 
 @layer base {
   :root {
-    --background: #060911;
-    --foreground: #f1f5f9;
-    --card: #0c121e;
-    --card-foreground: #f8fafc;
-    --border: #1e293b;
-    --primary: #0284c7;
+    --background: #eef2f6;
+    --foreground: #1e293b;
+    --card: #ffffff;
+    --card-foreground: #1e293b;
+    --border: #e2e8f0;
+    --primary: #00897b;
     --danger: #dc2626;
     --warning: #d97706;
-    --success: #059669;
+    --success: #00897b;
   }
 
   /* Universal prevention of text insertion caret line */
@@ -26,8 +26,8 @@
 
   html,
   body {
-    background-color: var(--background);
-    color: var(--foreground);
+    background-color: #eef2f6;
+    color: #1e293b;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11", "tnum";
     overflow-x: hidden;
     cursor: default;
@@ -58,16 +58,16 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #080c16;
+  background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 2px;
+  background: #cbd5e1;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #94a3b8;
 }
 
 /* Monospace metrics font styling */
